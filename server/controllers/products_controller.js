@@ -33,10 +33,12 @@ module.exports = {
   },
   update: (req, res, next) => {
     const dbInstance = req.app.get('db')
-    const { params, query } = req
+
+    const { id } = req.params
+    const { desc } = req.query
 
 
-    dbInstance.update_product([params.id, query.desc])
+    dbInstance.update_product([id, desc])
       .then(() => res.sendStatus(200))
       .catch(err => {
         res.status(500).send({ errorMessage: "whoopsie-daisie that didn't work!" })
